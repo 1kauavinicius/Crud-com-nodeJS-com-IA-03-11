@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-sistema",
+  "version": "1.0.0",
+  "description": "Sistema de Gerenciamento de clientes, fornecedores e produtos (Node.js, Express, EJS e Bootstrap 5)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": ["crud", "express", "ejs", "bootstrap"],
+  "author": "Kauã Vinícius e Felipe Nunes",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}

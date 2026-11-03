@@ -1,0 +1,80 @@
+/* Tema azul sobre o Bootstrap 5 */
+:root {
+  --azul-900: #0b2a5b;
+  --azul-700: #1046a3;
+  --azul-600: #1457c7;
+  --azul-500: #1d6fe8;
+  --azul-100: #e7f0ff;
+  --azul-50: #f3f7ff;
+
+  --bs-primary: var(--azul-600);
+  --bs-primary-rgb: 20, 87, 199;
+  --bs-link-color: var(--azul-600);
+  --bs-link-color-rgb: 20, 87, 199;
+  --bs-link-hover-color: var(--azul-700);
+  --bs-body-bg: var(--azul-50);
+  --bs-body-font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --bs-border-radius: .6rem;
+}
+
+body { background-color: var(--azul-50); }
+
+.btn-primary {
+  --bs-btn-bg: var(--azul-600);
+  --bs-btn-border-color: var(--azul-600);
+  --bs-btn-hover-bg: var(--azul-700);
+  --bs-btn-hover-border-color: var(--azul-700);
+  --bs-btn-active-bg: var(--azul-900);
+  --bs-btn-active-border-color: var(--azul-900);
+  --bs-btn-disabled-bg: var(--azul-600);
+  --bs-btn-disabled-border-color: var(--azul-600);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--azul-600);
+  --bs-btn-border-color: var(--azul-600);
+  --bs-btn-hover-bg: var(--azul-600);
+  --bs-btn-hover-border-color: var(--azul-600);
+  --bs-btn-active-bg: var(--azul-700);
+  --bs-btn-active-border-color: var(--azul-700);
+}
+.text-primary { color: var(--azul-600) !important; }
+.text-bg-primary-subtle { background-color: var(--azul-100) !important; }
+.text-primary-emphasis { color: var(--azul-700) !important; }
+.form-control:focus, .form-select:focus, .btn:focus-visible {
+  border-color: var(--azul-500);
+  box-shadow: 0 0 0 .2rem rgba(29, 111, 232, .2);
+}
+
+/* Navegação */
+.app-navbar { background: linear-gradient(90deg, var(--azul-900), var(--azul-700)); }
+.app-navbar .nav-link { color: rgba(255, 255, 255, .8); border-radius: .5rem; padding: .5rem .8rem; }
+.app-navbar .nav-link:hover { color: #fff; background: rgba(255, 255, 255, .1); }
+.app-navbar .nav-link.active { color: #fff; background: rgba(255, 255, 255, .18); }
+
+/* Página inicial */
+.hero { background: linear-gradient(135deg, var(--azul-900), var(--azul-500)); }
+.hero-icon { font-size: 8rem; opacity: .25; }
+.module-card { transition: transform .15s ease, box-shadow .15s ease; }
+.module-card:hover { transform: translateY(-4px); box-shadow: 0 .75rem 1.5rem rgba(16, 70, 163, .15) !important; }
+.module-icon {
+  width: 52px; height: 52px; border-radius: .8rem;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--azul-100); color: var(--azul-600); font-size: 1.5rem;
+}
+
+/* Cards e tabelas */
+.card { border-radius: .9rem; }
+.card-header:first-child { border-radius: .9rem .9rem 0 0; }
+.app-table thead th {
+  background: var(--azul-100); color: var(--azul-900);
+  font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 0;
+}
+.app-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Rodapé */
+.app-footer { background: var(--azul-900); color: rgba(255, 255, 255, .85); }
+
+@media (max-width: 575.98px) {
+  .display-5 { font-size: 2rem; }
+  main { padding-top: 1.25rem !important; }
+}

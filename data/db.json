@@ -1,0 +1,73 @@
+{
+  "seq": {
+    "clientes": 3,
+    "fornecedores": 3,
+    "produtos": 4
+  },
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Ana Beatriz Lima",
+      "email": "ana.lima@exemplo.com",
+      "telefone": "(11) 91234-5678"
+    },
+    {
+      "id": 2,
+      "nome": "Carlos Eduardo Souza",
+      "email": "carlos.souza@exemplo.com",
+      "telefone": "(21) 99876-5432"
+    },
+    {
+      "id": 3,
+      "nome": "Mariana Oliveira",
+      "email": "mariana.oliveira@exemplo.com",
+      "telefone": "(31) 98765-4321"
+    }
+  ],
+  "fornecedores": [
+    {
+      "id": 1,
+      "nome": "Distribuidora Alfa",
+      "email": "contato@alfa.com",
+      "telefone": "(11) 3456-7890"
+    },
+    {
+      "id": 2,
+      "nome": "Tech Suprimentos",
+      "email": "vendas@techsuprimentos.com",
+      "telefone": "(19) 3344-5566"
+    },
+    {
+      "id": 3,
+      "nome": "Papelaria Central",
+      "email": "atendimento@papelariacentral.com",
+      "telefone": "(41) 3222-1100"
+    }
+  ],
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Teclado sem fio",
+      "preco": 129.9,
+      "estoque": 25
+    },
+    {
+      "id": 2,
+      "nome": "Mouse óptico",
+      "preco": 59.5,
+      "estoque": 4
+    },
+    {
+      "id": 3,
+      "nome": "Monitor 24 polegadas",
+      "preco": 899,
+      "estoque": 0
+    },
+    {
+      "id": 4,
+      "nome": "Cabo HDMI 2m",
+      "preco": 24.9,
+      "estoque": 60
+    }
+  ]
+}

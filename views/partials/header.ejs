@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= titulo %> | <%= nomeSistema %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-dark app-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="/">
+        <i class="bi bi-grid-1x2-fill me-2"></i><%= nomeSistema %>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+              aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuPrincipal">
+        <ul class="navbar-nav ms-auto gap-lg-1">
+          <li class="nav-item">
+            <a class="nav-link <%= ativo === 'home' ? 'active' : '' %>" href="/"><i class="bi bi-house-door me-1"></i>Início</a>
+          </li>
+          <% Object.values(modulos).forEach(function (m) { %>
+            <li class="nav-item">
+              <a class="nav-link <%= ativo === m.chave ? 'active' : '' %>" href="/<%= m.chave %>">
+                <i class="bi <%= m.icone %> me-1"></i><%= m.plural %>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1 py-4 py-md-5">
+    <div class="container">
+      <%- include('flash') %>

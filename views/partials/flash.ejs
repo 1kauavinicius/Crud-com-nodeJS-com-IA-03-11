@@ -1,0 +1,7 @@
+<% if (flash) { %>
+  <div class="alert alert-<%= flash.tipo %> alert-dismissible fade show d-flex align-items-center" role="alert" data-auto-dismiss>
+    <i class="bi <%= flash.tipo === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill' %> me-2"></i>
+    <div><%= flash.texto %></div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+  </div>
+<% } %>

@@ -1,0 +1,118 @@
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 fw-bold mb-1"><i class="bi <%= modulo.icone %> text-primary me-2"></i><%= modulo.plural %></h1>
+    <p class="text-secondary mb-0"><%= modulo.descricao %></p>
+  </div>
+  <a href="<%= base %>/novo" class="btn btn-primary">
+    <i class="bi bi-plus-lg me-1"></i>Novo <%= modulo.singular.toLowerCase() %>
+  </a>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="card-header bg-white py-3">
+    <form method="get" action="<%= base %>" class="row g-2 align-items-center">
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="search" name="q" value="<%= q %>" class="form-control" placeholder="Buscar em <%= modulo.plural.toLowerCase() %>...">
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </div>
+      </div>
+      <% if (q) { %>
+        <div class="col-auto">
+          <a href="<%= base %>" class="btn btn-link text-decoration-none"><i class="bi bi-x-circle me-1"></i>Limpar busca</a>
+        </div>
+      <% } %>
+      <div class="col-12 col-md ms-md-auto text-md-end text-secondary small">
+        <%= registros.length %> <%= registros.length === 1 ? 'registro' : 'registros' %>
+      </div>
+    </form>
+  </div>
+
+  <% if (registros.length === 0) { %>
+    <div class="card-body text-center py-5">
+      <i class="bi bi-inbox display-4 text-primary opacity-50"></i>
+      <p class="mt-3 mb-1 fw-semibold">
+        <%= q ? 'Nenhum resultado encontrado.' : 'Nenhum registro cadastrado ainda.' %>
+      </p>
+      <p class="text-secondary mb-3">
+        <%= q ? 'Tente buscar por outro termo.' : 'Comece adicionando o primeiro ' + modulo.singular.toLowerCase() + '.' %>
+      </p>
+      <a href="<%= base %>/novo" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo <%= modulo.singular.toLowerCase() %></a>
+    </div>
+  <% } else { %>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0 app-table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center" style="width: 70px;">#</th>
+            <% modulo.campos.forEach(function (c) { %>
+              <th scope="col"><%= c.label %></th>
+            <% }) %>
+            <th scope="col" class="text-end" style="width: 170px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% registros.forEach(function (r) { %>
+            <tr>
+              <td class="text-center text-secondary"><%= r.id %></td>
+              <% modulo.campos.forEach(function (c) { %>
+                <td>
+                  <% if (c.tipo === 'moeda') { %>
+                    <%= moeda(r[c.name]) %>
+                  <% } else if (c.tipo === 'inteiro') { %>
+                    <% if (r[c.name] === 0) { %>
+                      <span class="badge text-bg-danger">Sem estoque</span>
+                    <% } else if (r[c.name] <= 5) { %>
+                      <span class="badge text-bg-warning"><%= r[c.name] %> un. (baixo)</span>
+                    <% } else { %>
+                      <span class="badge text-bg-primary-subtle text-primary-emphasis"><%= r[c.name] %> un.</span>
+                    <% } %>
+                  <% } else if (c.tipo === 'email') { %>
+                    <a href="mailto:<%= r[c.name] %>" class="link-primary text-decoration-none"><%= r[c.name] %></a>
+                  <% } else if (c.name === 'nome') { %>
+                    <span class="fw-semibold"><%= r[c.name] %></span>
+                  <% } else { %>
+                    <%= r[c.name] %>
+                  <% } %>
+                </td>
+              <% }) %>
+              <td class="text-end text-nowrap">
+                <a href="<%= base %>/<%= r.id %>/editar" class="btn btn-sm btn-outline-primary" title="Editar">
+                  <i class="bi bi-pencil-square"></i><span class="d-none d-sm-inline ms-1">Editar</span>
+                </a>
+                <button type="button" class="btn btn-sm btn-outline-danger" title="Excluir"
+                        data-bs-toggle="modal" data-bs-target="#modalExcluir"
+                        data-action="<%= base %>/<%= r.id %>/excluir"
+                        data-nome="<%= r.nome %>">
+                  <i class="bi bi-trash"></i><span class="d-none d-sm-inline ms-1">Excluir</span>
+                </button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirTitulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form method="post" id="formExcluir" class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalExcluirTitulo">
+          <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Confirmar exclusão
+        </h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Deseja realmente excluir <strong id="nomeExcluir"></strong>? Esta ação não poderá ser desfeita.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-1"></i>Excluir</button>
+      </div>
+    </form>
+  </div>
+</div>

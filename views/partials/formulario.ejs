@@ -1,0 +1,62 @@
+<% const editando = Boolean(registro && registro.id); %>
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8 col-xl-7">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Início</a></li>
+        <li class="breadcrumb-item"><a href="<%= base %>" class="text-decoration-none"><%= modulo.plural %></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%= editando ? 'Editar' : 'Novo' %></li>
+      </ol>
+    </nav>
+
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white py-3">
+        <h1 class="h4 fw-bold mb-0">
+          <i class="bi <%= editando ? 'bi-pencil-square' : 'bi-plus-circle' %> text-primary me-2"></i>
+          <%= editando ? 'Editar ' + modulo.singular.toLowerCase() : 'Novo ' + modulo.singular.toLowerCase() %>
+        </h1>
+      </div>
+      <div class="card-body p-4">
+        <% if (Object.keys(erros).length) { %>
+          <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <div>Corrija os campos destacados e tente novamente.</div>
+          </div>
+        <% } %>
+
+        <form method="post" action="<%= editando ? base + '/' + registro.id + '/editar' : base %>" class="needs-validation" novalidate>
+          <% modulo.campos.forEach(function (c) { %>
+            <div class="mb-3">
+              <label for="<%= c.name %>" class="form-label fw-semibold"><%= c.label %></label>
+              <div class="input-group has-validation">
+                <% if (c.prefixo) { %>
+                  <span class="input-group-text"><%= c.prefixo %></span>
+                <% } else if (c.icone) { %>
+                  <span class="input-group-text"><i class="bi <%= c.icone %>"></i></span>
+                <% } %>
+                <input type="<%= c.input %>" id="<%= c.name %>" name="<%= c.name %>"
+                       class="form-control <%= erros[c.name] ? 'is-invalid' : '' %>"
+                       value="<%= registro[c.name] === undefined ? '' : registro[c.name] %>"
+                       placeholder="<%= c.placeholder || '' %>"
+                       <% if (c.step) { %>step="<%= c.step %>"<% } %>
+                       <% if (c.min) { %>min="<%= c.min %>"<% } %>
+                       <% if (c.tipo === 'moeda') { %>inputmode="decimal"<% } %>
+                       <% if (c.tipo === 'inteiro') { %>inputmode="numeric"<% } %>
+                       <% if (c.tipo === 'texto') { %>minlength="2" maxlength="100"<% } %>
+                       required>
+                <div class="invalid-feedback"><%= erros[c.name] || 'Preencha este campo corretamente.' %></div>
+              </div>
+            </div>
+          <% }) %>
+
+          <div class="d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 mt-4">
+            <a href="<%= base %>" class="btn btn-light"><i class="bi bi-arrow-left me-1"></i>Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check-lg me-1"></i><%= editando ? 'Salvar alterações' : 'Cadastrar' %>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
